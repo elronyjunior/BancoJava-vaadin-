@@ -1,1 +1,108 @@
-/* Add your styles here */
+/* Tema personalizado para Banco Digital */
+
+:root {
+    --primary-color: #2E8B57; /* Verde escuro */
+    --secondary-color: #4682B4; /* Azul aço */
+    --accent-color: #FFD700; /* Ouro */
+    --background-color: #F5F5F5; /* Cinza claro */
+    --card-background: #FFFFFF;
+    --text-color: #333333;
+    --border-color: #DDDDDD;
+    --success-color: #32CD32;
+    --error-color: #FF6347;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+vaadin-app-layout {
+    background-color: var(--background-color);
+}
+
+vaadin-tabs {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+vaadin-tab[selected] {
+    background-color: var(--secondary-color);
+}
+
+vaadin-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+vaadin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+vaadin-button[theme~="primary"] {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+vaadin-button[theme~="success"] {
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+vaadin-button[theme~="error"] {
+    background-color: var(--error-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+vaadin-button[theme~="contrast"] {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+vaadin-text-area {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+vaadin-select, vaadin-combo-box, vaadin-number-field {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+vaadin-notification-card {
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    vaadin-horizontal-layout {
+        flex-direction: column;
+    }
+
+    vaadin-card {
+        width: 100% !important;
+        margin-bottom: 16px;
+    }
+}
