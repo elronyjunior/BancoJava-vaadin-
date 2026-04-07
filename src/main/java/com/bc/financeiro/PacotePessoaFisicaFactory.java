@@ -26,7 +26,7 @@ public class PacotePessoaFisicaFactory implements ProdutoFinanceiroFactory {
 
     @Override
     public List<String> getTiposContaDisponiveis() {
-        return List.of("corrente", "poupanca");
+        return List.of("corrente", "poupanca", "investimento");
     }
 
     @Override
@@ -36,6 +36,6 @@ public class PacotePessoaFisicaFactory implements ProdutoFinanceiroFactory {
 
     @Override
     public String getDescricaoPacote() {
-        return "Pacote com foco em uso pessoal, cartão de limite moderado e seguro residencial.";
+        return "Pacote com foco em uso pessoal, cartão de limite moderado, seguro residencial e opção de investimento.";
     }
 }

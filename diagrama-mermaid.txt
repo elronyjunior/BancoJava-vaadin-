@@ -1,0 +1,181 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+direction TB
+
+class Application {
+    +main(args: String[]) void
+}
+
+class MainView {
+    -Conta contaAtual
+    -Cartao cartaoAtual
+    -Seguro seguroAtual
+    -String contaTitular
+    -String contaObjetivo
+    -String contaCpf
+    -String cartaoNomeImpresso
+    -String cartaoNumero
+    -String cartaoValidade
+    -String seguroNome
+    -String seguroCartaoContemplado
+    -String seguroObservacao
+    -List~CartaoRegistrado~ cartoesRegistrados
+    -ProdutoFinanceiroFactory factoryAtual
+    -Select~String~ pacoteSelect
+    -Select~String~ contaTipoSelect
+    +MainView()
+}
+
+class CartaoRegistrado {
+    <<record>>
+    -String nomeTitular
+    -String numero
+    -String validade
+    -String bandeira
+    +descricao() String
+}
+
+class GerenciadorTransacoes {
+    -static GerenciadorTransacoes instancia
+    -List~Transacao~ historico
+    -GerenciadorTransacoes()
+    +static getInstancia() GerenciadorTransacoes
+    +registrar(transacao: Transacao) void
+    +getHistorico() List~Transacao~
+}
+
+class Transacao {
+    -String tipo
+    -double valor
+    -String descricao
+    -Instant momento
+    +Transacao(tipo: String, valor: double, descricao: String)
+    +getTipo() String
+    +getValor() double
+    +getDescricao() String
+    +getMomento() Instant
+}
+
+class Conta {
+    <<interface>>
+    +depositar(valor: double) void
+    +sacar(valor: double) void
+    +visualizar() String
+    +getTipoConta() String
+}
+
+class ContaCorrente {
+    -double saldo
+    -double limiteChequeEspecial
+    -double limiteCredito
+    +ContaCorrente(saldoInicial: double, limiteChequeEspecial: double)
+    +depositar(valor: double) void
+    +sacar(valor: double) void
+    +visualizar() String
+    +getTipoConta() String
+}
+
+class ContaPoupanca {
+    -double saldo
+    -double taxaRendimento
+    +ContaPoupanca(taxaRendimento: double)
+    +depositar(valor: double) void
+    +sacar(valor: double) void
+    +visualizar() String
+    +getTipoConta() String
+}
+
+class ContaInvestimento {
+    -double saldo
+    -String tipoAtivo
+    +ContaInvestimento(tipoAtivo: String)
+    +depositar(valor: double) void
+    +sacar(valor: double) void
+    +visualizar() String
+    +getTipoConta() String
+}
+
+class Cartao {
+    -String numero
+    -String bandeira
+    -double limiteCredito
+    -String validade
+    +Cartao(numero: String, bandeira: String, limiteCredito: double, validade: String)
+    +getNumero() String
+    +getBandeira() String
+    +getLimiteCredito() double
+    +getValidade() String
+}
+
+class Seguro {
+    -String tipoApolice
+    -double valorPremio
+    -double valorCobertura
+    +Seguro(tipoApolice: String, valorPremio: double, valorCobertura: double)
+    +getTipoApolice() String
+    +getValorPremio() double
+    +getValorCobertura() double
+}
+
+class ContaFactory {
+    +criarConta(tipo: String) Conta
+}
+
+class ProdutoFinanceiroFactory {
+    <<interface>>
+    +criarConta(tipoConta: String) Conta
+    +criarCartao() Cartao
+    +criarSeguro() Seguro
+    +getTiposContaDisponiveis() List~String~
+    +getNomePacote() String
+    +getDescricaoPacote() String
+}
+
+class PacotePessoaFisicaFactory {
+    -ContaFactory contaFactory
+    +criarConta(tipoConta: String) Conta
+    +criarCartao() Cartao
+    +criarSeguro() Seguro
+    +getTiposContaDisponiveis() List~String~
+    +getNomePacote() String
+    +getDescricaoPacote() String
+}
+
+class PacotePessoaJuridicaFactory {
+    -ContaFactory contaFactory
+    +criarConta(tipoConta: String) Conta
+    +criarCartao() Cartao
+    +criarSeguro() Seguro
+    +getTiposContaDisponiveis() List~String~
+    +getNomePacote() String
+    +getDescricaoPacote() String
+}
+
+Application ..> MainView
+MainView ..> ProdutoFinanceiroFactory
+MainView ..> PacotePessoaFisicaFactory
+MainView ..> PacotePessoaJuridicaFactory
+MainView ..> Conta
+MainView ..> Cartao
+MainView ..> Seguro
+MainView ..> GerenciadorTransacoes
+MainView ..> Transacao
+MainView *-- CartaoRegistrado
+ProdutoFinanceiroFactory <|.. PacotePessoaFisicaFactory
+ProdutoFinanceiroFactory <|.. PacotePessoaJuridicaFactory
+Conta <|.. ContaCorrente
+Conta <|.. ContaPoupanca
+Conta <|.. ContaInvestimento
+PacotePessoaFisicaFactory *-- ContaFactory
+PacotePessoaJuridicaFactory *-- ContaFactory
+ContaFactory ..> Conta
+ProdutoFinanceiroFactory ..> Conta
+ProdutoFinanceiroFactory ..> Cartao
+ProdutoFinanceiroFactory ..> Seguro
+GerenciadorTransacoes "1" o-- "many" Transacao
+ContaCorrente ..> GerenciadorTransacoes
+ContaPoupanca ..> GerenciadorTransacoes
+ContaInvestimento ..> GerenciadorTransacoes
