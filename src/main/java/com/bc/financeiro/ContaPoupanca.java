@@ -35,4 +35,9 @@ public class ContaPoupanca implements Conta {
     public String visualizar() {
         return "Conta Poupança - Saldo: R$ " + String.format("%.2f", saldo) + " - Taxa de rendimento: " + (taxaRendimento * 100) + "%";
     }
+
+    @Override
+    public String getTipoConta() {
+        return "Conta Poupança";
+    }
 }

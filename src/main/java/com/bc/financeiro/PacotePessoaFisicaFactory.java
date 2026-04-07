@@ -1,12 +1,17 @@
 package com.bc.financeiro;
 
+import java.util.List;
+
 public class PacotePessoaFisicaFactory implements ProdutoFinanceiroFactory {
 
     private final ContaFactory contaFactory = new ContaFactory();
 
     @Override
-    public Conta criarConta() {
-        return contaFactory.criarConta("corrente");
+    public Conta criarConta(String tipoConta) {
+        if (!getTiposContaDisponiveis().contains(tipoConta)) {
+            throw new IllegalArgumentException("O pacote Pessoa Física não oferece a conta " + tipoConta + ".");
+        }
+        return contaFactory.criarConta(tipoConta);
     }
 
     @Override
@@ -17,5 +22,20 @@ public class PacotePessoaFisicaFactory implements ProdutoFinanceiroFactory {
     @Override
     public Seguro criarSeguro() {
         return new Seguro("Residencial", 850.0, 75000.0);
+    }
+
+    @Override
+    public List<String> getTiposContaDisponiveis() {
+        return List.of("corrente", "poupanca");
+    }
+
+    @Override
+    public String getNomePacote() {
+        return "Pessoa Física";
+    }
+
+    @Override
+    public String getDescricaoPacote() {
+        return "Pacote com foco em uso pessoal, cartão de limite moderado e seguro residencial.";
     }
 }

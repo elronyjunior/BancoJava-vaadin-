@@ -35,4 +35,9 @@ public class ContaInvestimento implements Conta {
     public String visualizar() {
         return "Conta Investimento (" + tipoAtivo + ") - Saldo: R$ " + String.format("%.2f", saldo);
     }
+
+    @Override
+    public String getTipoConta() {
+        return "Conta Investimento";
+    }
 }

@@ -37,4 +37,9 @@ public class ContaCorrente implements Conta {
     public String visualizar() {
         return "Conta Corrente - Saldo: R$ " + String.format("%.2f", saldo) + " - Limite Cheque Especial: R$ " + String.format("%.2f", limiteChequeEspecial);
     }
+
+    @Override
+    public String getTipoConta() {
+        return "Conta Corrente";
+    }
 }

@@ -1,108 +1,583 @@
-/* Tema personalizado para Banco Digital */
-
 :root {
-    --primary-color: #2E8B57; /* Verde escuro */
-    --secondary-color: #4682B4; /* Azul aço */
-    --accent-color: #FFD700; /* Ouro */
-    --background-color: #F5F5F5; /* Cinza claro */
-    --card-background: #FFFFFF;
-    --text-color: #333333;
-    --border-color: #DDDDDD;
-    --success-color: #32CD32;
-    --error-color: #FF6347;
+    --green-950: #063521;
+    --green-900: #0c5a37;
+    --green-800: #117347;
+    --green-700: #1e925d;
+    --green-500: #4fc989;
+    --green-100: #eef9f2;
+    --gold-300: #f1c766;
+    --white: #ffffff;
+    --bg: #edf7f0;
+    --text-900: #183126;
+    --text-700: #537065;
+    --text-500: #7c9187;
+    --border: rgba(12, 90, 55, 0.10);
+    --shadow-lg: 0 24px 60px rgba(8, 55, 33, 0.14);
+    --shadow-md: 0 12px 28px rgba(8, 55, 33, 0.10);
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
     margin: 0;
-    padding: 0;
+    background:
+        radial-gradient(circle at top left, rgba(79, 201, 137, 0.24), transparent 22%),
+        radial-gradient(circle at top right, rgba(12, 90, 55, 0.10), transparent 20%),
+        linear-gradient(180deg, #eff9f2 0%, #e4f4ea 100%);
+    color: var(--text-900);
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
 }
 
-vaadin-app-layout {
-    background-color: var(--background-color);
+vaadin-vertical-layout.main-view {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    gap: 18px;
 }
 
-vaadin-tabs {
-    background-color: var(--primary-color);
-    color: white;
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 32px;
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 20%),
+        radial-gradient(circle at 20% 80%, rgba(79, 201, 137, 0.26), transparent 24%),
+        linear-gradient(135deg, #06311d 0%, #0c5a37 45%, #17925d 100%);
+    box-shadow: var(--shadow-lg);
 }
 
-vaadin-tab[selected] {
-    background-color: var(--secondary-color);
+.hero-badge {
+    width: fit-content;
+    max-width: 100%;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.83rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
-vaadin-card {
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s, box-shadow 0.2s;
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    max-width: 820px;
+    padding: 26px 28px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(241, 249, 244, 0.95));
+    box-shadow: 0 18px 40px rgba(5, 49, 29, 0.18);
+    border: 1px solid rgba(12, 90, 55, 0.08);
 }
 
-vaadin-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.page-title,
+.page-subtitle {
+    max-width: 760px;
+}
+
+.page-title {
+    margin: 0;
+    color: var(--green-950);
+    font-size: clamp(2.5rem, 4vw, 4.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+}
+
+.page-subtitle {
+    margin: 0;
+    color: var(--text-700);
+    font-size: 1.06rem;
+    line-height: 1.6;
+    max-width: 62ch;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    min-width: 170px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--white);
+}
+
+.hero-stat-value {
+    display: block;
+    font-size: 1.45rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.hero-stat-label {
+    display: block;
+    margin-top: 6px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.92rem;
+}
+
+.top-nav {
+    width: 100%;
+    margin: 0;
+}
+
+vaadin-tabs.top-nav {
+    width: min(100%, 760px);
+    margin: 8px auto 6px;
+    padding: 10px;
+    background: linear-gradient(135deg, #0a4f30, #117347);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 26px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 18px 40px rgba(8, 55, 33, 0.16);
+    gap: 8px;
+}
+
+vaadin-tabs.top-nav vaadin-tab {
+    min-height: 54px;
+    border-radius: 18px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    padding-inline: 22px;
+    font-size: 1.05rem;
+}
+
+vaadin-tabs.top-nav vaadin-tab[selected] {
+    background:
+        radial-gradient(circle at top right, rgba(241, 199, 102, 0.22), transparent 28%),
+        linear-gradient(135deg, #ffffff, #f4fbf6);
+    color: var(--green-950);
+    box-shadow:
+        0 12px 24px rgba(4, 40, 23, 0.18),
+        inset 0 0 0 1px rgba(12, 90, 55, 0.08);
+}
+
+vaadin-tabs.top-nav vaadin-tab:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.panel-section {
+    gap: 18px;
+}
+
+.section-title {
+    margin: 0;
+    color: var(--green-950);
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.config-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top right, rgba(79, 201, 137, 0.10), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 250, 245, 0.98));
+    box-shadow: var(--shadow-md);
+}
+
+.selection-row {
+    gap: 14px;
+    align-items: end;
+    margin: 0;
+}
+
+.package-banner,
+.summary-card,
+.product-panel,
+.account-spotlight,
+.timeline-item {
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+}
+
+.package-banner {
+    padding: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(241, 199, 102, 0.24), transparent 22%),
+        linear-gradient(180deg, #ffffff 0%, #f4fbf6 100%);
+    box-shadow: none;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--green-100);
+    color: var(--green-900);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.muted-text {
+    color: var(--text-700);
+}
+
+.product-grid,
+.summary-grid {
+    gap: 18px;
+}
+
+.product-panel,
+.summary-card {
+    flex: 1 1 300px;
+    min-width: 300px;
+}
+
+.product-panel {
+    min-height: 280px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 22%),
+        radial-gradient(circle at bottom left, rgba(79, 201, 137, 0.12), transparent 28%),
+        linear-gradient(145deg, #0a4f30, #1e925d);
+    color: var(--white);
+    overflow: hidden;
+}
+
+.product-panel h3 {
+    margin: 0 0 12px;
+    color: var(--white);
+    font-size: 1.55rem;
+    letter-spacing: -0.02em;
+}
+
+.product-panel p {
+    margin: 0;
+    max-width: 22ch;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.55;
+}
+
+.product-panel .muted-text {
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.summary-card {
+    padding: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fcf8 100%);
+}
+
+.summary-card h3,
+.account-spotlight h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.account-spotlight {
+    padding: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(79, 201, 137, 0.14), transparent 24%),
+        linear-gradient(145deg, #052f1b, #117347);
+    color: var(--white);
+    box-shadow: var(--shadow-lg);
+}
+
+.account-spotlight h3,
+.account-spotlight p {
+    color: var(--white);
+}
+
+.account-spotlight .status-badge {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--white);
+}
+
+vaadin-button {
+    min-height: 48px;
+    padding-inline: 18px;
+    border-radius: 16px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    box-shadow: none;
+}
+
+vaadin-button[theme~="primary"],
+vaadin-button[theme~="success"],
+vaadin-button[theme~="error"],
+vaadin-button[theme~="contrast"] {
+    color: var(--white);
 }
 
 vaadin-button[theme~="primary"] {
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
+    background: linear-gradient(135deg, var(--green-800), var(--green-500));
 }
 
 vaadin-button[theme~="success"] {
-    background-color: var(--success-color);
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #0f7448, #2fb672);
 }
 
 vaadin-button[theme~="error"] {
-    background-color: var(--error-color);
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #0b5c38, #17925d);
 }
 
 vaadin-button[theme~="contrast"] {
-    background-color: var(--accent-color);
-    color: var(--text-color);
-    border-radius: 8px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #d8a83f, var(--gold-300));
+    color: #4a3407;
 }
 
-vaadin-text-area {
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+vaadin-button.product-action {
+    width: 100%;
+    background: var(--white) !important;
+    color: var(--green-900) !important;
+    display: block;
+    align-self: stretch;
 }
 
-vaadin-select, vaadin-combo-box, vaadin-number-field {
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+vaadin-button.product-action::part(label) {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
 }
 
-h1, h2 {
-    color: var(--primary-color);
-    font-weight: 600;
+vaadin-select,
+vaadin-number-field {
+    border-radius: 16px;
+    --vaadin-input-field-background: rgba(255, 255, 255, 0.96);
+    --vaadin-input-field-border-width: 1px;
+    --vaadin-input-field-border-color: rgba(12, 90, 55, 0.14);
+    --vaadin-input-field-value-color: var(--text-900);
 }
 
-vaadin-notification-card {
-    border-radius: 8px;
-    background-color: var(--primary-color);
-    color: white;
+.history-scroller {
+    border-radius: 28px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.64);
+    border: 1px solid rgba(12, 90, 55, 0.08);
 }
 
-/* Responsividade */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 18px 20px 18px 24px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 18px;
+    bottom: 18px;
+    width: 6px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--green-500), var(--green-900));
+}
+
+.timeline-title {
+    font-weight: 800;
+    color: var(--green-900);
+}
+
+.timeline-value {
+    font-weight: 800;
+    color: var(--green-800);
+}
+
+.timeline-description {
+    margin: 8px 0 4px;
+    color: var(--text-900);
+}
+
+.timeline-time {
+    color: var(--text-500);
+    font-size: 0.9rem;
+}
+
+.page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    margin-top: 20px;
+    padding: 22px 24px;
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    background:
+        radial-gradient(circle at top right, rgba(241, 199, 102, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(236, 248, 240, 1));
+    box-shadow: var(--shadow-md);
+}
+
+.footer-title {
+    display: block;
+    color: var(--green-950);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.footer-brand p {
+    margin: 6px 0 0;
+    color: var(--text-700);
+}
+
+.footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--text-500);
+    font-size: 0.94rem;
+    text-align: right;
+}
+
+@media (min-width: 769px) {
+    vaadin-vertical-layout.main-view {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .product-panel,
+    .summary-card {
+        min-width: calc(50% - 12px);
+    }
+}
+
 @media (max-width: 768px) {
-    vaadin-horizontal-layout {
-        flex-direction: column;
+    vaadin-vertical-layout.main-view {
+        padding: 14px 12px 28px;
+        gap: 14px;
     }
 
-    vaadin-card {
+    .hero-section {
+        padding: 22px 18px;
+        border-radius: 28px;
+        gap: 16px;
+    }
+
+    .hero-content {
+        width: auto;
+        max-width: none;
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    .hero-badge {
+        font-size: 0.76rem;
+    }
+
+    .page-title,
+    .page-subtitle {
+        max-width: none;
+    }
+
+    .page-title {
+        font-size: 2.15rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.96rem;
+    }
+
+    .config-card {
+        padding: 18px;
+        border-radius: 22px;
+    }
+
+    vaadin-tabs.top-nav {
+        width: 100%;
+        margin-top: 0;
+        padding: 6px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #0a4f30, #117347);
+        box-shadow: 0 14px 28px rgba(8, 55, 33, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        backdrop-filter: none;
+    }
+
+    vaadin-tabs.top-nav vaadin-tab {
+        min-height: 44px;
+        font-size: 0.94rem;
+        color: rgba(255, 255, 255, 0.92);
+        padding-inline: 10px;
+    }
+
+    vaadin-tabs.top-nav vaadin-tab[selected] {
+        background:
+            radial-gradient(circle at top right, rgba(241, 199, 102, 0.16), transparent 30%),
+            linear-gradient(135deg, #ffffff, #edf8f1);
+        color: var(--green-950);
+    }
+
+    .package-banner,
+    .summary-card,
+    .product-panel,
+    .account-spotlight,
+    .timeline-item {
+        border-radius: 22px;
+    }
+
+    .selection-row {
+        gap: 10px;
+    }
+
+    .selection-row vaadin-select,
+    .selection-row vaadin-number-field,
+    .selection-row vaadin-button {
         width: 100% !important;
-        margin-bottom: 16px;
+    }
+
+    .product-panel,
+    .summary-card {
+        min-width: 100%;
+    }
+
+    .product-panel {
+        min-height: 230px;
+    }
+
+    vaadin-button.product-action {
+        min-height: 44px;
+        padding-inline: 14px;
+        font-size: 0.95rem;
+    }
+
+    .hero-stat {
+        min-width: 100%;
+    }
+
+    .page-footer {
+        flex-direction: column;
+        padding: 20px 18px;
+        border-radius: 22px;
+    }
+
+    .footer-meta {
+        text-align: left;
     }
 }
