@@ -1,4 +1,6 @@
 :root {
+    --layout-width: 1182px;
+    --content-width: 1128px;
     --green-950: #063521;
     --green-900: #0c5a37;
     --green-800: #117347;
@@ -14,31 +16,52 @@
     --border: rgba(12, 90, 55, 0.10);
     --shadow-lg: 0 24px 60px rgba(8, 55, 33, 0.14);
     --shadow-md: 0 12px 28px rgba(8, 55, 33, 0.10);
+    --page-gradient: linear-gradient(160deg, #edf7f0 0%, #dff0e5 42%, #f6fbf7 100%);
 }
 
+html,
 body {
     margin: 0;
-    background:
-        radial-gradient(circle at top left, rgba(79, 201, 137, 0.24), transparent 22%),
-        radial-gradient(circle at top right, rgba(12, 90, 55, 0.10), transparent 20%),
-        linear-gradient(180deg, #eff9f2 0%, #e4f4ea 100%);
+    overflow-x: hidden;
+    background: var(--page-gradient);
     color: var(--text-900);
     font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
 }
 
 vaadin-vertical-layout.main-view {
-    max-width: 1180px;
+    max-width: var(--layout-width);
+    width: 100%;
+    min-height: 100vh;
     margin: 0 auto;
-    padding: 24px 16px 40px;
-    gap: 18px;
+    padding: 24px 28px 84px;
+    gap: 16px;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.hero-section,
+vaadin-tabs.top-nav,
+.content-shell,
+.config-card,
+.product-grid,
+.summary-grid,
+.page-footer {
+    width: min(100%, var(--content-width));
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 .hero-section {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    padding: 32px;
-    border-radius: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: auto;
+    padding: 22px 22px;
+    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background:
         radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 20%),
@@ -62,25 +85,26 @@ vaadin-vertical-layout.main-view {
 .hero-content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
-    width: fit-content;
-    max-width: 820px;
-    padding: 26px 28px;
-    border-radius: 28px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(241, 249, 244, 0.95));
-    box-shadow: 0 18px 40px rgba(5, 49, 29, 0.18);
-    border: 1px solid rgba(12, 90, 55, 0.08);
+    width: 100%;
+    max-width: 760px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    text-align: center;
 }
 
 .page-title,
 .page-subtitle {
-    max-width: 760px;
+    max-width: var(--layout-width);
 }
 
 .page-title {
     margin: 0;
-    color: var(--green-950);
-    font-size: clamp(2.5rem, 4vw, 4.2rem);
+    color: var(--white);
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
     line-height: 0.92;
     letter-spacing: -0.05em;
     text-wrap: balance;
@@ -88,22 +112,24 @@ vaadin-vertical-layout.main-view {
 
 .page-subtitle {
     margin: 0;
-    color: var(--text-700);
-    font-size: 1.06rem;
-    line-height: 1.6;
-    max-width: 62ch;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.95rem;
+    line-height: 1.45;
+    max-width: 54ch;
 }
 
 .hero-stats {
     display: flex;
-    gap: 14px;
+    gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 }
 
 .hero-stat {
-    min-width: 170px;
-    padding: 16px 18px;
-    border-radius: 20px;
+    min-width: 130px;
+    padding: 10px 12px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--white);
@@ -111,30 +137,32 @@ vaadin-vertical-layout.main-view {
 
 .hero-stat-value {
     display: block;
-    font-size: 1.45rem;
+    font-size: 1.2rem;
     line-height: 1;
     font-weight: 800;
 }
 
 .hero-stat-label {
     display: block;
-    margin-top: 6px;
+    margin-top: 4px;
     color: rgba(255, 255, 255, 0.78);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
 }
 
 .top-nav {
     width: 100%;
     margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 vaadin-tabs.top-nav {
-    width: min(100%, 760px);
     margin: 8px auto 6px;
-    padding: 10px;
+    padding: 8px;
+    display: block;
     background: linear-gradient(135deg, #0a4f30, #117347);
     border: 2px solid rgba(255, 255, 255, 0.12);
-    border-radius: 26px;
+    border-radius: 22px;
     backdrop-filter: blur(14px);
     box-shadow: 0 18px 40px rgba(8, 55, 33, 0.16);
     gap: 8px;
@@ -166,29 +194,42 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 }
 
 .panel-section {
-    gap: 18px;
+    gap: 16px;
+}
+
+.content-shell {
+    margin: 0 auto;
+}
+
+.tab-panel {
+    width: 100%;
 }
 
 .section-title {
     margin: 0;
     color: var(--green-950);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    text-align: center;
     letter-spacing: -0.02em;
 }
 
 .section-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    width: 100%;
 }
 
 .config-card {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    padding: 22px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 12px;
+    padding: 16px 18px;
     border: 1px solid var(--border);
-    border-radius: 28px;
+    border-radius: 20px;
     background:
         radial-gradient(circle at top right, rgba(79, 201, 137, 0.10), transparent 26%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 250, 245, 0.98));
@@ -196,9 +237,20 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 }
 
 .selection-row {
-    gap: 14px;
+    width: 100%;
+    max-width: 960px;
+    gap: 12px;
+    justify-content: center;
     align-items: end;
-    margin: 0;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.selection-row > * {
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 360px;
 }
 
 .package-banner,
@@ -207,13 +259,17 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 .account-spotlight,
 .timeline-item {
     border: 1px solid var(--border);
-    border-radius: 28px;
+    border-radius: 24px;
     background: var(--white);
     box-shadow: var(--shadow-md);
 }
 
 .package-banner {
-    padding: 24px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 16px;
     background:
         radial-gradient(circle at top right, rgba(241, 199, 102, 0.24), transparent 22%),
         linear-gradient(180deg, #ffffff 0%, #f4fbf6 100%);
@@ -241,18 +297,37 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 
 .product-grid,
 .summary-grid {
-    gap: 18px;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.product-grid {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+}
+
+.summary-grid {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
 }
 
 .product-panel,
 .summary-card {
-    flex: 1 1 300px;
-    min-width: 300px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .product-panel {
-    min-height: 280px;
-    padding: 22px;
+    min-height: 272px;
+    height: 100%;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -267,15 +342,16 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 .product-panel h3 {
     margin: 0 0 12px;
     color: var(--white);
-    font-size: 1.55rem;
+    font-size: 1.32rem;
     letter-spacing: -0.02em;
 }
 
 .product-panel p {
     margin: 0;
-    max-width: 22ch;
+    max-width: 24ch;
     color: rgba(255, 255, 255, 0.84);
-    line-height: 1.55;
+    line-height: 1.45;
+    font-size: 0.95rem;
 }
 
 .product-panel .muted-text {
@@ -283,7 +359,12 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 }
 
 .summary-card {
-    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 272px;
+    height: 100%;
+    padding: 18px;
     background: linear-gradient(180deg, #ffffff 0%, #f7fcf8 100%);
 }
 
@@ -293,8 +374,58 @@ vaadin-tabs.top-nav vaadin-tab:hover {
     margin-bottom: 10px;
 }
 
+.info-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fbfefc 0%, #f1f9f4 100%);
+    border: 1px solid rgba(12, 90, 55, 0.08);
+}
+
+.info-group-title {
+    color: var(--green-900);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(12, 90, 55, 0.08);
+}
+
+.info-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-500);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.info-value {
+    color: var(--text-900);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
 .account-spotlight {
-    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
     background:
         radial-gradient(circle at top right, rgba(255, 255, 255, 0.12), transparent 24%),
         radial-gradient(circle at bottom left, rgba(79, 201, 137, 0.14), transparent 24%),
@@ -311,6 +442,43 @@ vaadin-tabs.top-nav vaadin-tab:hover {
 .account-spotlight .status-badge {
     background: rgba(255, 255, 255, 0.14);
     color: var(--white);
+}
+
+.account-spotlight .info-group {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+.account-spotlight .info-group-title,
+.account-spotlight .info-label,
+.account-spotlight .info-value {
+    color: var(--white);
+}
+
+.account-spotlight .info-item {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.operations-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(79, 201, 137, 0.10), transparent 26%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 250, 245, 0.98));
+    box-shadow: var(--shadow-md);
+}
+
+.operations-card .selection-row {
+    max-width: none;
+    align-items: end;
+}
+
+.operations-card vaadin-number-field {
+    flex: 1 1 240px;
+    max-width: 260px;
 }
 
 vaadin-button {
@@ -360,6 +528,30 @@ vaadin-button.product-action::part(label) {
     text-align: center;
 }
 
+vaadin-button.operation-button {
+    min-width: 190px;
+    min-height: 48px;
+    padding-inline: 22px;
+    border-radius: 16px;
+    box-shadow: none;
+    background: var(--white) !important;
+    color: var(--green-900) !important;
+    border: 1px solid rgba(12, 90, 55, 0.16);
+}
+
+vaadin-button.deposit-button {
+    background: var(--white) !important;
+}
+
+vaadin-button.withdraw-button {
+    background: var(--white) !important;
+}
+
+vaadin-button.operation-button::part(label) {
+    font-size: 0.98rem;
+    justify-content: center;
+}
+
 vaadin-select,
 vaadin-number-field {
     border-radius: 16px;
@@ -370,28 +562,40 @@ vaadin-number-field {
 }
 
 .history-scroller {
-    border-radius: 28px;
-    padding: 8px;
+    border-radius: 24px;
     background: rgba(255, 255, 255, 0.64);
     border: 1px solid rgba(12, 90, 55, 0.08);
+    box-sizing: border-box;
+}
+
+vaadin-scroller.history-scroller::part(content) {
+    display: block;
+    height: 100%;
+    padding: 6px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .timeline-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 8px;
+    gap: 12px;
+    padding: 6px;
+    box-sizing: border-box;
 }
 
 .timeline-item {
     position: relative;
-    padding: 18px 20px 18px 24px;
+    padding: 16px 18px 16px 22px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .timeline-item::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: 10px;
     top: 18px;
     bottom: 18px;
     width: 6px;
@@ -420,39 +624,79 @@ vaadin-number-field {
 }
 
 .page-footer {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 18px;
-    margin-top: 20px;
-    padding: 22px 24px;
-    border-radius: 28px;
+    align-items: center;
+    gap: 24px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    padding: 20px 22px;
+    border-radius: 24px;
     border: 1px solid var(--border);
-    background:
-        radial-gradient(circle at top right, rgba(241, 199, 102, 0.18), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(236, 248, 240, 1));
+    background: linear-gradient(135deg, #ffffff, #f2f8f4);
     box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 0;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
 }
 
 .footer-title {
     display: block;
     color: var(--green-950);
-    font-size: 1rem;
+    font-size: 1.02rem;
     font-weight: 800;
 }
 
 .footer-brand p {
-    margin: 6px 0 0;
+    margin: 0;
     color: var(--text-700);
+    line-height: 1.5;
 }
 
 .footer-meta {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
+    flex-shrink: 0;
     color: var(--text-500);
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     text-align: right;
+}
+
+vaadin-dialog-overlay::part(content) {
+    padding: 0;
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+vaadin-dialog-overlay .entity-dialog {
+    width: min(92vw, 720px);
+}
+
+.entity-dialog {
+    width: min(92vw, 720px);
+}
+
+.entity-dialog p {
+    margin: 0 0 18px;
+    color: var(--text-700);
+    line-height: 1.6;
+}
+
+.dialog-form {
+    min-height: 360px;
+}
+
+.dialog-actions {
+    margin-top: auto;
+    padding-top: 10px;
 }
 
 @media (min-width: 769px) {
@@ -461,29 +705,46 @@ vaadin-number-field {
     }
 }
 
-@media (max-width: 900px) {
-    .product-panel,
-    .summary-card {
-        min-width: calc(50% - 12px);
+@media (max-width: 1100px) {
+    .product-grid,
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    vaadin-vertical-layout.main-view {
+        padding-inline: 20px;
+        padding-bottom: 56px;
     }
 }
 
 @media (max-width: 768px) {
     vaadin-vertical-layout.main-view {
-        padding: 14px 12px 28px;
+        padding: 14px 12px 48px;
         gap: 14px;
     }
 
+    .hero-section,
+    vaadin-tabs.top-nav,
+    .content-shell,
+    .config-card,
+    .product-grid,
+    .summary-grid,
+    .page-footer {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .hero-section {
-        padding: 22px 18px;
-        border-radius: 28px;
-        gap: 16px;
+        padding: 18px 14px;
+        border-radius: 24px;
+        gap: 12px;
+        min-height: auto;
     }
 
     .hero-content {
         width: auto;
         max-width: none;
-        padding: 18px;
+        padding: 0;
         border-radius: 22px;
     }
 
@@ -497,16 +758,21 @@ vaadin-number-field {
     }
 
     .page-title {
-        font-size: 2.15rem;
+        font-size: 1.9rem;
     }
 
     .page-subtitle {
-        font-size: 0.96rem;
+        font-size: 0.9rem;
     }
 
     .config-card {
-        padding: 18px;
-        border-radius: 22px;
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .operations-card {
+        padding: 14px;
+        border-radius: 18px;
     }
 
     vaadin-tabs.top-nav {
@@ -546,19 +812,26 @@ vaadin-number-field {
         gap: 10px;
     }
 
+    .selection-row > *,
     .selection-row vaadin-select,
     .selection-row vaadin-number-field,
     .selection-row vaadin-button {
         width: 100% !important;
+        max-width: none;
     }
 
-    .product-panel,
-    .summary-card {
-        min-width: 100%;
+    .selection-row,
+    .package-banner {
+        max-width: none;
+    }
+
+    .product-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
     }
 
     .product-panel {
-        min-height: 230px;
+        min-height: 220px;
     }
 
     vaadin-button.product-action {
@@ -573,11 +846,23 @@ vaadin-number-field {
 
     .page-footer {
         flex-direction: column;
-        padding: 20px 18px;
+        align-items: flex-start;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 18px 16px;
         border-radius: 22px;
     }
 
     .footer-meta {
         text-align: left;
+    }
+
+    .entity-dialog,
+    vaadin-dialog-overlay .entity-dialog {
+        width: min(96vw, 720px);
+    }
+
+    .dialog-form {
+        min-height: auto;
     }
 }
